@@ -90,7 +90,7 @@ export async function startServer(serverOptions: ServerOptions, onStarted: (opti
 		addListenerToWorkerMessages(onWorkerMessage)
 	}
 
-	const serverOpenPromise = new OpenPromise<void>
+	const serverOpenPromise = new OpenPromise()
 
 	wss.on("listening", () => {
 		log(chalk.gray(`Started Echogarden WebSocket server on port ${serverOptions.port}`))
