@@ -269,20 +269,22 @@ export function timelineToSubtitles(timeline: Timeline, subtitlesConfig?: Subtit
 					const lineLengthWithNextWord = nextWordExtendedEndOffset - lineStartOffset
 					const wordsRemaining = wordTimeline.length - wordIndex - 1
 
-					const phraseSeparators = [',', '，', '、', ';', ':', '),', '",', '”,']
+					//Added code
+					const lineLengthWords = wordIndex - lineStartWordOffset + 1
 
-					const lineLengthWithNextWordExceedsMaxLineWidth = lineLengthWithNextWord >= maxLineWidth
-					const lineLengthExceedsHalfMaxLineWidth = lineLength >= maxLineWidth / 2
+					// const phraseSeparators = [',', '，', '、', ';', ':', '),', '",', '”,']
 
-					const wordsRemainingAreEqualOrLessToMinimumWordsInLine = wordsRemaining <= config.minWordsInLine!
-					const remainingTextExceedsMaxLineWidth = entryText.length - lineStartOffset > maxLineWidth
-					const followingSubstringIsPhraseSeparator = startsWithAnyOf(entryText.substring(wordEndOffset), phraseSeparators)
+
+					// const lineLengthWithNextWordExceedsMaxLineWidth = lineLengthWithNextWord >= maxLineWidth
+					// const lineLengthExceedsHalfMaxLineWidth = lineLength >= maxLineWidth / 2
+
+
+					// const wordsRemainingAreEqualOrLessToMinimumWordsInLine = wordsRemaining <= config.minWordsInLine!
+					// const remainingTextExceedsMaxLineWidth = entryText.length - lineStartOffset > maxLineWidth
+					// const followingSubstringIsPhraseSeparator = startsWithAnyOf(entryText.substring(wordEndOffset), phraseSeparators)
 
 					if (isLastWord ||
-						lineLengthWithNextWordExceedsMaxLineWidth ||
-							(remainingTextExceedsMaxLineWidth &&
-							lineLengthExceedsHalfMaxLineWidth &&
-							(wordsRemainingAreEqualOrLessToMinimumWordsInLine || followingSubstringIsPhraseSeparator))) {
+						lineLengthWords == config.minWordsInLine!) {
 
 						let lineEndOffset
 
